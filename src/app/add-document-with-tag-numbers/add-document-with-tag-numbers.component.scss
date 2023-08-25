@@ -1,0 +1,75 @@
+/* Apply necessary styling to elements */
+
+.container{
+    padding: 15px;
+}
+
+.document-form-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .document-form {
+    display: inline-block;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+  }
+  
+  .document-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .document-list-container {
+    text-align: center;
+  }
+  
+  .list-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .document-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+  }
+  
+  .document-table th, .document-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .document-table th {
+    background-color: #f7f7f7;
+    font-weight: bold;
+  }
+  
+  button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }

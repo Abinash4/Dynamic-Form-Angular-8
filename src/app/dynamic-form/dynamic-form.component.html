@@ -1,0 +1,53 @@
+<div  class="modal" >
+    <h2>Cattle Management</h2>
+    
+    <form>
+      <label for="animalType">Animal Type</label>
+      <input type="text" id="animalType" [(ngModel)]="newCattle.animalType">
+      
+      <label for="breed">Breed</label>
+      <input type="text" id="breed" [(ngModel)]="newCattle.breed">
+      
+      <label for="age">Age</label>
+      <input type="number" id="age" [(ngModel)]="newCattle.age">
+      
+      <label for="gender">Gender</label>
+      <input type="text" id="gender" [(ngModel)]="newCattle.gender">
+      
+      <label for="tagNumber">Tag Number</label>
+      <input type="text" id="tagNumber" [(ngModel)]="newCattle.tagNumber">
+      
+      <label for="premium">Premium</label>
+      <input type="number" id="premium" [(ngModel)]="newCattle.premium">
+      
+      <button type="button" (click)="addCattle()">Add Cattle</button>
+    </form>
+    
+    <ul>
+        <li *ngFor="let cattle of cattleList; let i = index">
+            <!-- ... Existing cattle information ... -->
+            <button type="button" (click)="editCattle(i)">Edit</button>
+            <button type="button" (click)="deleteCattle(i)">Delete</button>
+          </li>
+          
+
+          
+          <div *ngIf="editingIndex !== -1">
+            <h3>{{ editingIndex === -2 ? 'Add New Cattle' : 'Edit Cattle' }}</h3>
+            <form>
+              <!-- ... Existing form fields ... -->
+          
+              <ng-container *ngIf="editingIndex !== -2; else addCattleSection">
+                <button type="button" (click)="saveEdit()">Save</button>
+                <button type="button" (click)="cancelEdit()">Cancel</button>
+              </ng-container>
+          
+              <ng-template #addCattleSection>
+                <button type="button" (click)="addCattleForm()">Add Cattle</button>
+              </ng-template>
+            </form>
+          </div>
+
+    </ul>
+  </div>
+  

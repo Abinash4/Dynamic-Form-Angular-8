@@ -1,0 +1,10 @@
+.modal-container {
+    transition: all 0.3s ease-in-out;
+    transform: scale(1);
+  }
+  
+  .modal-container.closed {
+    transform: scale(0);
+  }
+
+  

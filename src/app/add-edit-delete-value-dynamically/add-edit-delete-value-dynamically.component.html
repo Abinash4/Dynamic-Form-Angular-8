@@ -1,0 +1,103 @@
+<p>add-edit-delete-value-dynamically works!</p>
+
+
+<div>
+    <div >
+        <input placeholder="Scheme" type="text" [(ngModel)]="Scheme" (focusout)="clickme($event,'scheme')" >
+        <input placeholder="animalType" type="text" [(ngModel)]="animalType" (focusout)="clickme($event,'animalType')" >
+        <input placeholder="breed" type="text" [(ngModel)]="breed" (focusout)="clickme($event,'breed')" >
+        <input placeholder="NoOfCattle" type="text" [(ngModel)]="NoOfCattle" (focusout)="clickme($event,'NoOfCattle')" >
+        <input placeholder="Age" type="text" [(ngModel)]="age" (focusout)="clickme($event,'age')" >
+        <input placeholder="Gender" type="text" [(ngModel)]="colour" (focusout)="clickme($event,'colour')" >
+        <input placeholder="Identification" type="text" [(ngModel)]="identification" (focusout)="clickme($event,'identification')" >
+        
+        <div>
+            <input type="number" [(ngModel)]="newNumber" placeholder="Enter a number">
+            <button (click)="addNumber()">Add Number</button>
+        </div>
+
+        <!-- <div>
+            <input type="text" [(ngModel)]="animalType" placeholder="Enter animal type">
+            <input type="number" [(ngModel)]="age" placeholder="Enter age">
+          </div> -->
+
+        <table>
+          <thead>
+            <tr>
+              <th>Numbers</th>
+              <th>Files</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of numbersInRows; let rowIndex = index">
+              <ng-container *ngFor="let number of row; let columnIndex = index">
+                <td>{{ number }}</td>
+                <td>
+                  <input type="file" multiple (change)="handleFileInput($event, rowIndex, columnIndex)">
+                  <div class="file-grid">
+                    <div *ngFor="let fileData of getFileData(number)" class="file-item">
+                      <img [src]="fileData" alt="File" />
+                    </div>
+                    
+                  </div>
+                </td>
+                <td>
+                  <button (click)="editNumber(rowIndex, columnIndex)">Edit</button>
+                  <button (click)="deleteNumber(rowIndex, columnIndex)">Delete</button>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+        <button (click)="AddAllData()" >Add Data</button>
+    </div>
+
+    <!-- <button (click)="addSection()">Add Section</button> -->
+    
+    <div *ngFor="let ct of cattleDataList ; let i = index" >
+        <input placeholder="Scheme" type="text" [(ngModel)]="ct.Scheme" (focusout)="clickme($event,'scheme')" >
+        <input placeholder="animalType" type="text" [(ngModel)]="ct.animalType" (focusout)="clickme($event,'animalType')" >
+        <input placeholder="breed" type="text" [(ngModel)]="ct.breed" (focusout)="clickme($event,'breed')" >
+        <input placeholder="NoOfCattle" type="text" [(ngModel)]="ct.NoOfCattle" (focusout)="clickme($event,'NoOfCattle')" >
+        <input placeholder="Age" type="text" [(ngModel)]="ct.age" (focusout)="clickme($event,'age')" >
+        <input placeholder="Gender" type="text" [(ngModel)]="ct.colour" (focusout)="clickme($event,'colour')" >
+        <input placeholder="Identification" type="text" [(ngModel)]="ct.identification" (focusout)="clickme($event,'identification')" >
+        
+        <table>
+            <thead>
+              <tr>
+                <th>Numbers</th>
+                <th>Files</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of ct.numbersWithFiles; ">
+              <!-- <tr *ngFor="let row of numbersInRows; let rowIndex = index"> -->
+                <ng-container *ngFor="let number of row.files;">
+                  <td>{{ number }}</td>
+                  <td>
+                    <!-- <input type="file" multiple > -->
+                    <!-- <input type="file" multiple (change)="handleFileInput($event, rowIndex, columnIndex)"> -->
+                    <div class="file-grid">
+                      <div *ngFor="let fileData of getFileData(number)" class="file-item">
+                        <img [src]="fileData" alt="File" />
+                      </div>
+                      
+                    </div>
+                  </td>
+                  <!-- <td>
+                    <button (click)="editNumber(rowIndex, columnIndex)">Edit</button>
+                    <button (click)="deleteNumber(rowIndex, columnIndex)">Delete</button>
+                  </td> -->
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+
+    </div>
+</div>
+  
+  
+  

@@ -1,0 +1,48 @@
+<div class="modal-container" [@fade]>
+  <div class="header">
+    <button mat-icon-button class="edit-button">
+      <i class="fas fa-pencil-alt"></i>
+    </button>
+    <button mat-button class="close-button" (click)="onClose()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="content">
+    <h2>{{ data.title }}</h2>
+    <div class="form-boxes">
+      <div *ngFor="let formBox of formBoxes; let i = index" class="form-box">
+        <form *ngIf="!formBox.isEditing; else editForm" (submit)="onSubmitForm(formBox, i)" class="inner-form">
+          <label for="name{{ i }}">Name</label>
+          <input type="text" id="name{{ i }}" name="name" [(ngModel)]="formBox.name" required>
+
+          <label for="email{{ i }}">Email</label>
+          <input type="email" id="email{{ i }}" name="email" [(ngModel)]="formBox.email" required>
+
+          <!-- Add more fields here as needed -->
+
+          <button mat-button type="submit">
+            <i class="far fa-save" *ngIf="!formBox.isEditing"></i>
+            <i class="fas fa-edit" *ngIf="formBox.isEditing"></i>
+          </button>        </form>
+        <ng-template #editForm>
+          <form (submit)="onEditForm(formBox, i)" class="inner-form">
+            <label for="name{{ i }}">Name</label>
+            <input type="text" id="name{{ i }}" name="name" [(ngModel)]="formBox.name" required [readonly]="!formBox.isEditing">
+
+            <label for="email{{ i }}">Email</label>
+            <input type="email" id="email{{ i }}" name="email" [(ngModel)]="formBox.email" required [readonly]="!formBox.isEditing">
+
+            <!-- Add more fields here as needed -->
+
+            <button mat-button type="submit">
+              <i class="far fa-save" *ngIf="!formBox.isEditing"></i>
+              <i class="fas fa-edit" *ngIf="formBox.isEditing"></i>
+            </button>
+            <button mat-button type="button" (click)="onDeleteFormBox(i)">Delete</button>
+          </form>
+        </ng-template>
+      </div>
+      <button mat-button class="add-button" (click)="onAddFormBox()">Add Form</button>
+    </div>
+  </div>
+</div>
