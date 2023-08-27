@@ -1,37 +1,62 @@
-<div class="container"> 
+<div class="container">
 
 
 
-<div>
-    <label for="tagInput">Enter Tag Number: </label>
-    <input type="text" id="tagInput" [(ngModel)]="newTagNumber">
-    <button (click)="addTagNumber()">Add Tag</button>
-</div>
+    <div>
+        <label for="tagInput">Enter Tag Number: </label>
+        <input type="text" id="tagInput" [(ngModel)]="newTagNumber">
+        <button (click)="addTagNumber()">Add Tag</button>
+    </div>
 
-<table>
-    <thead>
-        <tr>
-            <th>Tag Number</th>
-            <th>Document 1</th>
-            <th>Document 2</th>
-            <th>Document 3</th>
-            <th>Document 4</th>
-            <th>Append Upload</th> <!-- New column -->
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let tag of tagDocuments; let i = index">
-            <td>{{ tag.tagnumber }}</td>
-            <td><input type="file" (change)="uploadDocument($event, i, 0)"></td>
-            <td><input type="file" (change)="uploadDocument($event, i, 1)"></td>
-            <td><input type="file" (change)="uploadDocument($event, i, 2)"></td>
-            <td><input type="file" (change)="uploadDocument($event, i, 3)"></td>
-            <td>
-                <!-- <button *ngIf="areAllDocumentsUploaded(tag) && !tag.uploaded" (click)="appendUpload(tag.tagnumber)"> -->
-                    <button *ngIf="areAllDocumentsUploaded(tag) &&  !uploadedStatus.get(tag.tagnumber)" (click)="appendUpload(tag.tagnumber)">Append</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>Tag Number</th>
+                <th>Image</th>
+                <th>Heaalth Cerificate</th>
+                <th>Quote</th>
+                <th>Other</th>
+                <th>Append Upload</th> <!-- New column -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tag of tagDocuments; let i = index">
+                <td>{{ tag.tagnumber }}</td>
+                <td>
+                    <label class="file-input-label"  [class.uploaded]="isDocumentUploaded(tag, 0)">
+                        <input type="file" (change)="uploadDocument($event, i, 0)">
+                        <span class="file-input-icon">{{ isDocumentUploaded(tag, 0) ? '🗃️' : '📁' }}</span>
+                        <span class="file-input-text">{{ getDocumentText(tag, 0) }}</span>
+                    </label>
+                </td>
+                <td>
+                    <label class="file-input-label"  [class.uploaded]="isDocumentUploaded(tag, 1)">
+                        <input type="file" (change)="uploadDocument($event, i, 1)">
+                        <span class="file-input-icon">{{ isDocumentUploaded(tag, 1) ? '🗃️' : '📁' }}</span>
+                        <span class="file-input-text">{{ getDocumentText(tag, 1) }}</span>
+                    </label>
+                </td>
+                <td>
+                    <label class="file-input-label"  [class.uploaded]="isDocumentUploaded(tag, 2)">
+                        <input type="file" (change)="uploadDocument($event, i, 2)">
+                        <span class="file-input-icon">{{ isDocumentUploaded(tag, 2) ? '🗃️' : '📁' }}</span>
+                        <span class="file-input-text">{{ getDocumentText(tag, 2) }}</span>
+                    </label>
+                </td>                
+                <td>
+                    <label class="file-input-label"  [class.uploaded]="isDocumentUploaded(tag, 3)">
+                        <input type="file" (change)="uploadDocument($event, i, 3)">
+                        <span class="file-input-icon">{{ isDocumentUploaded(tag, 3) ? '🗃️' : '📁' }}</span>
+                        <span class="file-input-text">{{ getDocumentText(tag, 3) }}</span>
+                    </label>
+                </td>
+                <td>
+                    <!-- <button *ngIf="areAllDocumentsUploaded(tag) && !tag.uploaded" (click)="appendUpload(tag.tagnumber)"> -->
+                    <button class="append-button" *ngIf="areAllDocumentsUploaded(tag) &&  !uploadedStatus.get(tag.tagnumber)"
+                        (click)="appendUpload(tag.tagnumber)">Upload</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 </div>

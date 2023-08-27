@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CatteDetailsComponent } from './catte-details/catte-details.component';
 import { AddEditDeleteValueDynamicallyComponent } from './add-edit-delete-value-dynamically/add-edit-delete-value-dynamically.component';
 import { AddDocumentWithTagNumbersComponent } from './add-document-with-tag-numbers/add-document-with-tag-numbers.component'; // Import FormsModule
+import { HttpClientModule } from '@angular/common/http';
+import { CommonService } from './common.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { AddDocumentWithTagNumbersComponent } from './add-document-with-tag-numb
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+
     NgbModule
   ],
   providers: [],

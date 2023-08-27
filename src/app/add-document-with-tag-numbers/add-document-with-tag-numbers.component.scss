@@ -1,75 +1,129 @@
-/* Apply necessary styling to elements */
 
-.container{
-    padding: 15px;
-}
-
-.document-form-container {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .document-form {
-    display: inline-block;
-    text-align: left;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f7f7f7;
-  }
-  
-  .document-input {
+/* Custom table styling */
+.custom-table {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
   }
   
-  .submit-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
+  .custom-table th {
+    border: 1px solid #ddd;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    background-color: #a32727;
+    color: #ffffff;
+  }
+  .custom-table td {
+    border: 1px solid #ddd;
+    padding: 0px 10px 0px 10px;
+    text-align: center;
+  }
+  
+  /* File input styling */
+  .file-input-label {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 5px;
+    
+  }
+  
+  .file-input-label input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
     cursor: pointer;
   }
   
-  .submit-button:hover {
-    background-color: #0056b3;
+  .file-input-icon {
+    display: inline-block;
+    font-size: 1.2em;
+    margin-right: 5px;
   }
   
-  .document-list-container {
+  /* Append button styling */
+  .append-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
     text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
   }
   
-  .list-title {
-    font-size: 24px;
-    margin-bottom: 20px;
+  .append-button:hover {
+    background-color: #45a049;
+  }
+
+//   .file-input-label.uploaded {
+    // .file-input-label.uploaded .file-input-text, 
+    .file-input-label.uploaded .file-input-icon {
+        .file-input-text{
+            border-radius: 10px !important;
+        }
+    // background-color: #f1bfb6;
+    // border-color: #d6e9c6;
+    box-shadow: 0 0 10px rgba(0, 128, 0, 0.5); /* Add a subtle green glow */
+  transition: box-shadow 0.3s;
   }
   
-  .document-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ccc;
+  .file-input-text {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+  }
+
+
+  .file-input-label.uploaded .file-input-icon,
+.file-input-label.uploaded .file-input-text {
+  animation: glowAnimation 1s ease-in-out;
+}
+
+  //animations
+
+  /* Add this to your existing CSS */
+/* Apply transition effects on button hover */
+.custom-table button.append-button {
+    transition: background-color 0.3s, transform 0.2s;
   }
   
-  .document-table th, .document-table td {
-    padding: 10px;
-    border: 1px solid #ccc;
+  .custom-table button.append-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
   }
   
-  .document-table th {
-    background-color: #f7f7f7;
-    font-weight: bold;
+  /* Apply transition effect on file input hover */
+  .file-input-label:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
   }
   
-  button[disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
+  /* Apply transition effect on table row hover */
+  .custom-table tbody tr:hover {
+    background-color: #f0f0f0;
   }
+
+  @keyframes glowAnimation {
+    0% {
+      box-shadow: none;
+    }
+    50% {
+      box-shadow: 0 0 10px rgba(0, 128, 0, 0.5); /* Add a subtle green glow */
+    }
+    100% {
+      box-shadow: none;
+    }
+  }
+  
+  
+  
+  

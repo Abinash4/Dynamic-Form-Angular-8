@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../common.service';
 
 @Component({
   selector: 'app-add-document-with-tag-numbers',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddDocumentWithTagNumbersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: CommonService) {}
+
 
   ngOnInit(): void {
   }
@@ -44,11 +46,40 @@ export class AddDocumentWithTagNumbersComponent implements OnInit {
     const tagDocument = this.tagDocuments.find(tag => tag.tagnumber === tagNumber);
     if (tagDocument) {
       // Perform append logic and save logic here
+      
       console.log(`Append Upload for Tag Number ${tagNumber}:`, tagDocument.files);
-      this.uploadedStatus.set(tagNumber, true); // Mark as uploaded
-      // Saving the documents for the tag number
-      // Implement your save logic here
-      console.log(`Saving Documents for Tag Number ${tagNumber}:`, tagDocument.files);
+      // this.uploadedStatus.set(tagNumber, true); // Mark as uploaded
+
+      //add document logic
+     
+    let obj ={
+      tagno:tagNumber, 
+      files:tagDocument.files
+    }
+
+    const formData = new FormData();
+    let myFiles :string[]=[];
+    formData.append("uniqueNumber", tagNumber.toString());
+
+      for (let i = 0; i < tagDocument.files.length; i++) {
+        formData.append('files', tagDocument.files[i],tagDocument.files[i].name);
+        // formData.append("FileName", file.name);
+      }
+
+      // console.log(obj);
+
+      this.api.uploadtDoc(formData).subscribe(
+        (res) => {
+          if (res.ResponseFlag == 1) {
+            alert("Email Sent Successfully");
+          } else {
+            alert("There is some issues please try again");
+          }
+         
+        }),(err) => {
+
+          console.log(err.error["text"]);
+        }
     }
   }
 
@@ -62,4 +93,18 @@ export class AddDocumentWithTagNumbersComponent implements OnInit {
     }
   }
 
+  isDocumentUploaded(tag: { tagnumber: string, files: File[] }, docIndex: number): boolean {
+    return !!tag.files[docIndex];
+  }
+  
+  getDocumentText(tag: { tagnumber: string, files: File[] }, docIndex: number): string {
+    // return this.isDocumentUploaded(tag, docIndex) ? 'File uploaded' : 'Upload document';
+    if (this.isDocumentUploaded(tag, docIndex)) {
+      const uploadedFile = tag.files[docIndex];
+      return uploadedFile.name; // Display the uploaded file name
+    } else {
+      return 'Upload document';
+    }
+  }
+  
 }
