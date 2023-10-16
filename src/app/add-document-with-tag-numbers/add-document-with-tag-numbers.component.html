@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
 
 
 
@@ -16,7 +16,7 @@
                 <th>Heaalth Cerificate</th>
                 <th>Quote</th>
                 <th>Other</th>
-                <th>Append Upload</th> <!-- New column -->
+                <th>Append Upload</th>
             </tr>
         </thead>
         <tbody>
@@ -51,7 +51,6 @@
                     </label>
                 </td>
                 <td>
-                    <!-- <button *ngIf="areAllDocumentsUploaded(tag) && !tag.uploaded" (click)="appendUpload(tag.tagnumber)"> -->
                     <button class="append-button" *ngIf="areAllDocumentsUploaded(tag) &&  !uploadedStatus.get(tag.tagnumber)"
                         (click)="appendUpload(tag.tagnumber)">Upload</button>
                 </td>
@@ -59,4 +58,16 @@
         </tbody>
     </table>
 
-</div>
+    <button class="submit-button" *ngIf="allDocumentsSubmitted" >
+        Submit All Documents
+      </button>
+
+    <button (click)="openModal()"></button>
+</div> -->
+
+
+<div class="loader-container">
+    <div class="cow-animation"></div>
+  </div>
+
+  <!-- <app-custom-loader *ngIf="isLoading"></app-custom-loader> -->

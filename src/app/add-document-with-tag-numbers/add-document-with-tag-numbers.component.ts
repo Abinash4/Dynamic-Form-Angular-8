@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AppComponent } from '../app.component'; // Update with actual path
+
 
 @Component({
   selector: 'app-add-document-with-tag-numbers',
@@ -8,21 +11,24 @@ import { CommonService } from '../common.service';
 })
 export class AddDocumentWithTagNumbersComponent implements OnInit {
 
-  constructor(private api: CommonService) {}
+  constructor(private api: CommonService ,public dialog: MatDialog) {}
 
 
   ngOnInit(): void {
+    
   }
   
   tagDocuments: { tagnumber: string, files: File[] }[] = [];
   uploadedStatus: Map<string, boolean> = new Map(); // Map to track uploaded status
 
   newTagNumber: string = '';
+  allDocumentsSubmitted = false;
 
   uploadDocument(event: any, tagIndex: number, docIndex: number) {
     const fileList: FileList | null = event.target.files;
     if (fileList && fileList.length > 0) {
       const uploadedFile = fileList[0];
+      
       if (uploadedFile.size <= 100 * 1024) { // Check if file size is less than or equal to 100KB
         let tagFiles = this.tagDocuments[tagIndex]?.files || [];
         tagFiles[docIndex] = uploadedFile;
@@ -30,6 +36,7 @@ export class AddDocumentWithTagNumbersComponent implements OnInit {
           this.tagDocuments[tagIndex] = { tagnumber: tagIndex.toString(), files: [] };
         }
         this.tagDocuments[tagIndex].files = tagFiles;
+        
       } else {
         // File size is too large
         console.log('File size exceeds 100KB.');
@@ -70,15 +77,22 @@ export class AddDocumentWithTagNumbersComponent implements OnInit {
 
       this.api.uploadtDoc(formData).subscribe(
         (res) => {
-          if (res.ResponseFlag == 1) {
+          console.log(res)
+          console.log(res.Message)
+          // console.log(JSON.parse(res))
+          if (res.Message=="Files uploaded successfully") {
             alert("Email Sent Successfully");
+            this.uploadedStatus.set(tagNumber, true); // Mark as uploaded
+            this.checkAllDocumentsSubmitted();
           } else {
             alert("There is some issues please try again");
+            this.uploadedStatus.set(tagNumber, false); // Mark as uploaded
           }
          
         }),(err) => {
 
           console.log(err.error["text"]);
+
         }
     }
   }
@@ -105,6 +119,21 @@ export class AddDocumentWithTagNumbersComponent implements OnInit {
     } else {
       return 'Upload document';
     }
+  }
+
+
+  checkAllDocumentsSubmitted() {
+    // this.allDocumentsSubmitted = this.tagDocuments.every(tag => tag.files.length === 4);
+    this.allDocumentsSubmitted = Array.from(this.uploadedStatus.values()).every(status => status);
+
+  }
+
+
+  openModal() {
+    this.dialog.open(AppComponent, {
+      width: '400px',
+      data: { message: 'Hello from the modal!' } // Pass any data needed
+    });
   }
   
 }

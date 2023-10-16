@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { Router } from '@angular/router';
 
-
+// import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +16,18 @@ export class AppComponent {
   newNumber: number;
   numbers: number[] = [];
   numbersInRows: number[][] = [];
+  documentUrl:string;
   // row: number[][]=[]
   title = 'web';
   constructor(public dialog: MatDialog , private router: Router) {}
+  isLoading: boolean = true;
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000); // Simulate 3 seconds of loading
+  }
+  
+
 
   openModal(): void {
     const dialogRef = this.dialog.open(CatteDetailsComponent, {

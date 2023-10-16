@@ -126,4 +126,38 @@
   
   
   
+
+
+
+
+  ///loader
+  /// 
+  .loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .cow-animation {
+    width: 200px; /* Set the width of each frame */
+    height: 150px; /* Set the height of each frame */
+    background: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngtree.com%2Ffree-png-vectors%2Fcartoon-cow&psig=AOvVaw3nMkBzvKDPs9mrHfVDAWNx&ust=1693427189035000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCNDT2YLagoEDFQAAAAAdAAAAABAE') no-repeat;
+    animation: animateCow 1s steps(8) infinite;
+  }
+  
+  @keyframes animateCow {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -1600px 0; /* Adjust based on the width of the sprite */
+    }
+  }
   
